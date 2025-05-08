@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Servicios</title>
+    <link rel="stylesheet" href="css/estilos-interactivo.css">
+    <style>
+        /* Estilo para el formulario */
+        body {
+        background-image: url('imagenes/fon.png'); /* Ruta de la imagen de fondo */
+        background-size: cover; /* La imagen cubre toda la pantalla */
+        background-position: center; /* Centrar la imagen */
+        background-repeat: no-repeat; /* No repetir la imagen */
+        font-family: Arial, sans-serif; /* Estilo de fuente */
+        }
+
+        header {
+            text-align: center; 
+            margin-top: 20px;  
+        }
+
+        
+        
+        
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        form input, form select {
+        width: 95%; /* Reduce el ancho de las cajas de texto */
+        padding: 10px; /* Ajusta el padding para reducir la altura */
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 14px; /* Tamaño de fuente ajustado */
+    }
+
+        form button {
+            background-color: #10e6db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #10dcee;
+        }
+
+        .actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Registro de Servicios</h1>
+    </header>
+
+    <section>
+        <form id="form-servicio">
+            <label for="idservicio">Código:</label>
+            <input type="text" id="idservicio" name="idservicio" required>
+
+            <label for="descripcion">Descripción del Servicio:</label>
+            <input type="text" id="descripcion" name="descripcion" required>
+
+            <div class="actions">
+                <button type="submit" id="btn-registrar">Registrar Servicio</button>
+                <button id="btn-salir" type="button" onclick="redireccionarMenu()">Salir</button>
+                <a href="listado_servicios.html" id="btn-listar" style="margin-left: 10px;">Ver Listado de Servicios</a>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 Plataforma Interactiva. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('form-servicio').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío normal del formulario
+
+            const formData = new FormData(this);
+
+            fetch('guardar_servicio.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data); // Mostrar respuesta del servidor
+                this.reset(); // Resetear el formulario
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+       // Función para redirigir al menú
+       document.getElementById('btn-salir').addEventListener('click', function() {
+            window.location.href = 'Menu.html'; // Redirige al menú
+        });
+
+        function redireccionarMenu() {
+            // Redirigir al menú principal
+            window.location.href = 'Menu.html';
+        }
+    </script>
+
+</body>
+</html>

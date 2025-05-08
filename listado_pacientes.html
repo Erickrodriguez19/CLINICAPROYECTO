@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Pacientes Registrados</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <style>
+        /* Estilos existentes */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('imagenes/fondo.png');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        /* Agrega estilos para el área de búsqueda */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .search-container input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 300px;
+            margin-right: 10px;
+        }
+        .search-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .search-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+         <h1>Listado de Pacientes Registrados</h1>
+         <br><a href="registro_pacientes.html" id="btn-registro" style="margin-bottom: 20px; display: inline-block;">Registrar Nuevo Paciente</a>
+    </header>
+
+    <!-- Agregamos el contenedor de búsqueda -->
+    <div class="search-container">
+        <input type="text" id="dni-buscar" placeholder="Buscar paciente por DNI">
+        <button onclick="buscarPacientePorDNI()">Buscar</button>
+    </div>
+
+    <section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>DNI</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Sexo</th>
+                    <th>Eliminar Paciente</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-pacientes">
+                <!-- Aquí se agregarán los registros de pacientes -->
+            </tbody>
+        </table>
+<br>
+        <div class="actions">
+            <button id="btn-salir" onclick="redireccionarMenu()">
+                <img src="imagenes/salir4.png" alt="Icono de salir" style="width:30px; height:20px; vertical-align:middle; margin-right:10px;">
+                Salir
+            </button>
+        </div>
+        
+
+        <div id="message-container" class="message"></div> <!-- Contenedor para mensajes -->
+    </section>
+
+    <script>
+        // Función para cargar los pacientes desde la base de datos
+        function cargarPacientes() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "obtener_pacientes.php", true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById("tabla-pacientes").innerHTML = this.responseText;
+                    agregarBotonesEliminar();
+                } else {
+                    mostrarMensaje("Error al cargar pacientes", "error");
+                }
+            }
+            xhr.onerror = function() {
+                mostrarMensaje("Error de conexión", "error");
+            };
+            xhr.send();
+        }
+
+        // Llamar a la función cuando se cargue la página
+        window.onload = cargarPacientes;
+
+        // Función para buscar paciente por DNI
+        function buscarPacientePorDNI() {
+            const dni = document.getElementById("dni-buscar").value;
+            if (dni) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", `buscar_paciente.php?dni=${dni}`, true);
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        document.getElementById("tabla-pacientes").innerHTML = this.responseText;
+                        agregarBotonesEliminar();
+                    } else {
+                        mostrarMensaje("Paciente no encontrado", "error");
+                    }
+                };
+                xhr.onerror = function() {
+                    mostrarMensaje("Error de conexión", "error");
+                };
+                xhr.send();
+            } else {
+                mostrarMensaje("Por favor, ingrese un DNI", "error");
+            }
+        }
+
+        // Función para eliminar pacientes
+        function eliminarPaciente(codigo) {
+            if (confirm("¿Está seguro de que desea eliminar este paciente?")) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "eliminar_paciente.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onload = function() {
+                    mostrarMensaje(this.responseText, this.status === 200 ? "success" : "error");
+                    if (this.status === 200 && this.responseText.includes("eliminado correctamente")) {
+                        cargarPacientes();
+                    }
+                };
+                xhr.onerror = function() {
+                    mostrarMensaje("Error de conexión", "error");
+                };
+                xhr.send("codigo=" + codigo);
+            }
+        }
+
+        // Función para mostrar mensajes
+        function mostrarMensaje(mensaje, tipo) {
+            const messageContainer = document.getElementById("message-container");
+            messageContainer.textContent = mensaje;
+            messageContainer.className = tipo === "success" ? "success" : "message";
+        }
+
+        // Función para redirigir al menú
+        function redireccionarMenu() {
+            window.location.href = 'Menu.html';
+        }
+
+        // Función para agregar botones de eliminar en cada fila
+        function agregarBotonesEliminar() {
+            const filas = document.querySelectorAll("#tabla-pacientes tr");
+            filas.forEach(fila => {
+                const codigo = fila.cells[0]?.textContent;
+                if (codigo) {
+                    const celdaEliminar = fila.insertCell(-1);
+                    const btnEliminar = document.createElement("button");
+                    btnEliminar.textContent = "Eliminar";
+                    btnEliminar.classList.add("delete");
+                    btnEliminar.onclick = () => eliminarPaciente(codigo);
+                    celdaEliminar.appendChild(btnEliminar);
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

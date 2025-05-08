@@ -1,0 +1,125 @@
+/* Estilos generales para el cuerpo de la página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Estilo para el título */
+h2 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+/* Estilo de los formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Estilo de las etiquetas */
+label {
+    font-size: 1.1rem;
+    color: #34495e;
+    margin-bottom: 5px;
+}
+
+/* Estilo de los campos de entrada */
+input[type="text"],
+input[type="number"],
+textarea {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Estilo para el área de texto */
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Estilo para los botones */
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+/* Efecto hover para botones */
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Estilo para los enlaces */
+a {
+    text-decoration: none;
+}
+
+/* Botones de enlace */
+a button {
+    width: auto;
+    margin-top: 20px;
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #2ecc71;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+a button:hover {
+    background-color: #27ae60;
+}
+
+/* Alineación de los botones de regresar y ver productos */
+button[type="button"] {
+    width: auto;
+    margin-top: 10px;
+    background-color: #e74c3c;
+    display: inline-block;
+}
+
+button[type="button"]:hover {
+    background-color: #c0392b;
+}
+
+/* Estilo para los mensajes de éxito o error */
+.success-message {
+    color: #27ae60;
+    text-align: center;
+    font-weight: bold;
+}
+
+.error-message {
+    color: #e74c3c;
+    text-align: center;
+    font-weight: bold;
+}

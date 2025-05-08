@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Citas</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            background-image: url('imagenes/fon.png');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .contenedor {
+            background-color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .mantenimiento {
+            text-align: center;
+        }
+
+        .mantenimiento button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px; /* Tamaño más pequeño */
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px; /* Texto más pequeño */
+        }
+
+        .mantenimiento button img {
+            vertical-align: middle;
+            margin-right: 5px;
+            width: 16px; /* Tamaño reducido de las imágenes */
+            height: 16px;
+        }
+
+        .mantenimiento button:hover {
+            background-color: #45a049;
+        }
+
+        .mantenimiento button[type="reset"],
+        .mantenimiento button[type="button"] {
+            background-color: #f44336;
+        }
+
+        .mantenimiento button[type="reset"]:hover,
+        .mantenimiento button[type="button"]:hover {
+            background-color: #e53935;
+        }
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <form action="" method="POST">
+        <div class="contenedor">
+            <h2>Región de Edición</h2>
+            <label for="n_cita">N° Cita:</label>
+            <input type="text" id="n_cita" name="n_cita" required>
+
+            <label for="fecha_registro">Fecha de Registro:</label>
+            <input type="datetime-local" id="fecha_registro" name="fecha_registro" required>
+
+            <label for="servicio">Servicio:</label>
+            <input type="text" id="servicio" name="servicio" required>
+
+            <label for="especialidad">Especialidad:</label>
+            <input type="text" id="especialidad" name="especialidad" required>
+
+            <label for="medico">Médico:</label>
+            <input type="text" id="medico" name="medico" required>
+
+            <label for="fecha_cita">Fecha de Cita:</label>
+            <input type="datetime-local" id="fecha_cita" name="fecha_cita" required>
+
+            <label for="costo">Costo:</label>
+            <input type="number" id="costo" name="costo" step="0.01" required>
+
+            <h2>Paciente</h2>
+            <label for="codigo">Código:</label>
+            <input type="text" id="codigo" name="codigo" required>
+
+            <label for="nombres">Nombres:</label>
+            <input type="text" id="nombres" name="nombres" required>
+
+            <label for="otros">Otros:</label>
+            <input type="text" id="otros" name="otros">
+
+            <label for="total_cancelar">Total a Cancelar S/:</label>
+            <input type="number" id="total_cancelar" name="total_cancelar" step="0.01">
+
+            <div class="mantenimiento">
+                <button type="submit" name="buscar" formaction="buscar_cita.php"><img src="imagenes/buscar.png" alt="Buscar"> Buscar</button>
+                <button type="submit" name="agregar" formaction="agregar_cita.php"><img src="imagenes/agregar.png" alt="Agregar"> Agregar cita</button>
+                <button type="submit" name="grabar" formaction="grabar_cita.php"><img src="imagenes/guardar.png" alt="Grabar"> Grabar</button>
+                <button type="reset"><img src="imagenes/cancelar.png" alt="Cancelar"> Cancelar</button>
+                <button type="button" onclick="window.location.href='Menu.html';"><img src="imagenes/salir3.png" alt="Salir"> Salir</button>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

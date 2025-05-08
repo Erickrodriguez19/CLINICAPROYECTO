@@ -1,0 +1,163 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+}
+
+/* Estilo para el menú de navegación */
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu-item {
+    position: relative;
+}
+
+.menu-item a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #333;
+}
+
+.menu-item:hover a {
+    background-color: #555;
+}
+
+/* Estilo para los submenús */
+.submenu {
+    display: none;
+    list-style: none;
+    position: absolute;
+    background-color: #333;
+    top: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.submenu li a {
+    padding: 10px 15px;
+    white-space: nowrap;
+}
+
+.menu-item:hover .submenu {
+    display: block;
+}
+
+
+/* Hero section */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #264653;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+/* Botones interactivos */
+.botones {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.boton {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
+    width: 150px;
+    margin: 10px;
+}
+
+.boton:hover {
+    transform: translateY(-10px);
+    background-color: #ddecefe9;
+}
+
+.boton img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.boton p {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Modales */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 0;
+    border-radius: 10px;
+    width: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.modal-header {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+}
+
+.cerrar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.cerrar:hover {
+    color: red;
+}
+
+.modal-body {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #2a9d8f;
+    color: white;
+    margin-top: 50px;
+}

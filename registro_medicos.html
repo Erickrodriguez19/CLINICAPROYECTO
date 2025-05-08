@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Médicos</title>
+    <link rel="stylesheet" href="css/medicos.css">
+    <style>
+        /* Estilo para el formulario */
+        body {
+            background-image: url('imagenes/fon.png'); /* Ruta de la imagen de fondo */
+            background-size: cover; /* La imagen cubre toda la pantalla */
+            background-position: center; /* Centrar la imagen */
+            background-repeat: no-repeat; /* No repetir la imagen */
+            font-family: Arial, sans-serif; /* Estilo de fuente */
+        }
+
+        header {
+            text-align: center; 
+            margin-top: 20px;  
+        }
+
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        form input, form select {
+        width: 95%; /* Reduce el ancho de las cajas de texto */
+        padding: 10px; /* Ajusta el padding para reducir la altura */
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 14px; /* Tamaño de fuente ajustado */
+    }
+
+        form button {
+            background-color: #0cd0ee;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #15bedc;
+        }
+
+        .actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Registro de Médicos</h1>
+    </header>
+
+    <section>
+        <form id="form-medico">
+            <label for="codigo">Código:</label>
+            <input type="text" id="codigo" name="codigo" required>
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" required>
+
+            <label for="nombres">Nombres:</label>
+            <input type="text" id="nombres" name="nombres" required>
+
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" required>
+
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" required>
+
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" required>
+
+            <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+
+            <label for="especialidad">Especialidad:</label>
+            <input type="text" id="especialidad" name="especialidad" required>
+
+            <div class="actions">
+                <button type="submit" id="btn-registrar">Registrar Médico</button>
+                <button id="btn-salir" onclick="redireccionarMenu()">Salir</button>
+                
+                
+                <a href="listado_medicos.html" id="btn-listar">Ver Listado de Médicos</a>
+            </div>
+        </form>
+    </section>
+
+    
+
+    <script>
+        function redireccionarMenu() {
+            // Redirigir al menú principal
+            window.location.href = 'menu_principal.html'; // Cambiar por la URL del menú principal
+        }
+
+        document.getElementById('form-medico').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío normal del formulario
+
+            const formData = new FormData(this);
+
+            fetch('guardar_medico.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data); // Mostrar respuesta del servidor
+                this.reset(); // Resetear el formulario
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Función para redirigir al menú
+        document.getElementById('btn-salir').addEventListener('click', function() {
+            window.location.href = 'Menu.html'; // Redirige al menú
+        });
+
+    </script>
+
+</body>
+</html>

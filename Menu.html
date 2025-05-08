@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinica</title>
+    <link rel="stylesheet" href="css/estilos-interactivo.css">
+</head>
+<body>
+
+    <!-- Menú de navegación -->
+<nav class="navbar">
+    <ul class="menu">
+        <!-- Sección Maestros -->
+        <li class="menu-item"><a href="#">Maestros</a>
+            <ul class="submenu">
+                <li><a href="registro_pacientes.html" target="_blank">Pacientes</a></li>
+                <li><a href="registro_medicos.html">Médicos</a></li>
+                <li><a href="registro_especialidades.html">Especialidades</a></li>
+                <li><a href="registro_servicios.html">Servicios</a></li>
+                
+                
+            </ul>
+        </li>
+
+        <!-- Sección Movimientos -->
+        <li class="menu-item"><a href="#">Movimientos</a>
+            <ul class="submenu">
+                <li><a href="regionedicion.html">Registrar Citas</a></li>
+                <li><a href="registro_productos.php">Registrar Inventario de productos</a></li>
+                <li><a href="historial_clinico.php">Registrar Historial Clinico</a></li>
+                <li><a href="lista_citas.php">Emitir Comprobante</a></li>
+            </ul>
+        </li>
+
+        <!-- Sección Consultas -->
+        <li class="menu-item"><a href="#">Consultas</a>
+            <ul class="submenu">
+                <li><a href="listado_pacientes.html">Pacientes</a></li>
+                <li><a href="listado_medicos.html">Empleados y Médicos</a></li>
+                <li><a href="listado_servicios.html">Servicios y Aplicaciones</a></li>
+                <li><a href="lista_citas.php">Citas Generadas</a></li>
+                <li><a href="listar_productos.php">Inventario de Productos</a></li>
+                <li><a href="listar_historial.php">Historial Clinico Generado</a></li>
+            </ul>
+        </li>
+
+        <!-- Sección Ayuda -->
+        <li class="menu-item"><a href="ayuda.php">Ayuda</a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+    <!-- Sección principal con botones interactivos -->
+    <section class="hero">
+        <h1>Bienvenido a la Plataforma NOVA SALUD</h1>
+        <p>Interactúa con los diferentes elementos para una experiencia dinámica.</p>
+        <div class="botones">
+            <div class="boton" onclick="abrirModal('modalMedico')">
+                <img src="imagenes/medico.png" alt="Médico">
+                <p>Médico</p>
+            </div>
+            <div class="boton" onclick="abrirModal('modalPacientes')">
+                <img src="imagenes/pacientes.png" alt="Pacientes">
+                <p>Pacientes</p>
+            </div>
+            <div class="boton" onclick="abrirModal('modalServicios')">
+                <img src="imagenes/servicios.png" alt="Servicios">
+                <p>Servicios</p>
+            </div>
+            <div class="boton" onclick="abrirModal('modalCitas')">
+                <img src="imagenes/citas.png" alt="Citas">
+                <p>Citas</p>
+            </div>
+            <div class="boton salir" onclick="cerrarPagina()" style="cursor: pointer;">
+                <img src="imagenes/salir3.png" alt="Salir">
+                <p>Salir</p>
+            </div>
+            
+            
+        </div>
+    </section>
+
+    <!-- Modales independientes -->
+<!-- Modal Médico -->
+<div id="modalMedico" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="cerrar" onclick="cerrarModal('modalMedico')">&times;</span>
+            <h2 class="modal-title">Información Médicos</h2>
+            <link rel="stylesheet" href="css/modal.css">
+        </div>
+        <div class="modal-body">
+            <p>
+                Nuestra Clínica NOVA SALUD Integral ofrece atención médica de alta calidad con un equipo de médicos especializados en diversas áreas.
+            </p>
+            <h3>Servicios Ofrecidos</h3>
+            <ul>
+                <li><strong>Consultas Médicas Generales:</strong> Evaluación y tratamiento de enfermedades comunes.</li>
+                <li><strong>Especialidades Médicas:</strong> Atención en pediatría, ginecología, cardiología, dermatología y medicina interna.</li>
+                <li><strong>Servicios de Prevención:</strong> Exámenes de salud, vacunaciones y programas educativos.</li>
+            </ul>
+            <h3>Nuestro Equipo</h3>
+            <p>
+                Contamos con médicos generales y especialistas comprometidos a brindar atención personalizada, trabajando en conjunto para asegurar diagnósticos precisos y tratamientos efectivos.
+            </p>
+            <h3>Compromiso</h3>
+            <p>
+                Nos dedicamos a mejorar la salud y calidad de vida de nuestros pacientes a través de un enfoque integral y preventivo.
+            </p>
+            <h3>Medicos Disponibles</h3>
+            <div class="image-gallery">
+                <img src="imagenes/medicos.png" alt="Médico 1" class="gallery-image">
+                <img src="imagenes/medi.png" alt="Médico 2" class="gallery-image">
+                <img src="imagenes/medi1.png" alt="Médico 3" class="gallery-image">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+   <!-- Modal Pacientes -->
+<div id="modalPacientes" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="cerrar" onclick="cerrarModal('modalPacientes')">&times;</span>
+            <h2 class="modal-title">Información Pacientes</h2>
+            <link rel="stylesheet" href="css/modal.css">
+        </div>
+        <div class="modal-body">
+            <p>
+                En nuestra Clínica NOVA SALUD  Integral, nos comprometemos a brindar una atención excepcional a nuestros pacientes, garantizando un ambiente seguro y cómodo.
+            </p>
+            <h3>Servicios Ofrecidos</h3>
+            <ul>
+                <li><strong>Atención Integral:</strong> Evaluación y seguimiento de la salud general de nuestros pacientes.</li>
+                <li><strong>Orientación y Educación:</strong> Programas educativos sobre salud y bienestar.</li>
+                <li><strong>Soporte Psicológico:</strong> Asesoramiento y terapia para mejorar el bienestar emocional.</li>
+            </ul>
+            <h3>Nuestro Compromiso</h3>
+            <p>
+                Nos dedicamos a ofrecer un servicio accesible y de alta calidad, donde la salud y el bienestar de nuestros pacientes son nuestra prioridad.
+            </p>
+            <h3>Pacientes</h3>
+            <div class="image-gallery">
+                <img src="imagenes/paciente1.png" alt="Paciente 1" class="gallery-image">
+                <img src="imagenes/pacientes2.png" alt="Paciente 2" class="gallery-image">
+                <img src="imagenes/paciente3.png" alt="Paciente 3" class="gallery-image">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Modal Servicios -->
+<div id="modalServicios" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="cerrar" onclick="cerrarModal('modalServicios')">&times;</span>
+            <h2 class="modal-title">Información Servicios</h2>
+            <link rel="stylesheet" href="css/modal.css">
+        </div>
+        <div class="modal-body">
+            <p>
+                En nuestra Clínica NOVA SALUD  Integral, ofrecemos una variedad de servicios diseñados para satisfacer las necesidades de salud de nuestros pacientes.
+            </p>
+            <h3>Servicios Ofrecidos</h3>
+            <ul>
+                <li><strong>Consultas Médicas:</strong> Evaluación y tratamiento por médicos especializados en diversas áreas.</li>
+                <li><strong>Exámenes de Diagnóstico:</strong> Análisis de laboratorio y estudios de imagen para una atención precisa.</li>
+                <li><strong>Servicios de Emergencia:</strong> Atención inmediata para situaciones críticas.</li>
+                <li><strong>Programas de Salud Preventiva:</strong> Campañas de vacunación y chequeos médicos regulares.</li>
+            </ul>
+            <h3>Nuestro Compromiso</h3>
+            <p>
+                Nos comprometemos a proporcionar servicios de salud de calidad, con un enfoque en la atención personalizada y la prevención.
+            </p>
+            <h3>Galería de Imágenes</h3>
+            <div class="image-gallery">
+                <img src="imagenes/servicios1.png" alt="Servicio 1" class="gallery-image">
+                <img src="imagenes/servicios4.png" alt="Servicio 2" class="gallery-image">
+                <img src="imagenes/servicios5.png" alt="Servicio 3" class="gallery-image">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+   <!-- Modal Citas -->
+<div id="modalCitas" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="cerrar" onclick="cerrarModal('modalCitas')">&times;</span>
+            <h2 class="modal-title">Información Citas</h2>
+            <link rel="stylesheet" href="css/modal.css">
+        </div>
+        <div class="modal-body">
+            <p>
+                En nuestra Clínica de NOVA SALUD Integral, facilitar el acceso a atención médica es una de nuestras prioridades. Aquí te explicamos cómo puedes programar tu cita.
+            </p>
+            <h3>Cómo Programar Citas</h3>
+            <ul>
+                <li><strong>Por Teléfono:</strong> Llama a nuestro número de contacto para agendar tu cita.</li>
+                <li><strong>En Línea:</strong> Utiliza nuestro sistema de citas en línea disponible en nuestra página web.</li>
+                <li><strong>Presencialmente:</strong> Visítanos en la clínica y nuestro personal te ayudará a programar tu cita.</li>
+            </ul>
+            <h3>Preguntas Frecuentes</h3>
+            <ul>
+                <li><strong>¿Cuánto tiempo antes debo llegar?</strong> Se recomienda llegar al menos 15 minutos antes de tu cita.</li>
+                <li><strong>¿Qué debo llevar a la cita?</strong> Lleva tu documento de identidad y cualquier historial médico relevante.</li>
+                <li><strong>¿Puedo cancelar o reprogramar mi cita?</strong> Sí, puedes hacerlo a través del mismo método que utilizaste para programarla.</li>
+            </ul>
+            <h3>Galería de Imágenes</h3>
+            <div class="image-gallery">
+                <img src="imagenes/CITA1.png" alt="Cita 1" class="gallery-image">
+                <img src="imagenes/CITA2.png" alt="Cita 2" class="gallery-image">
+                <img src="imagenes/CITA3.PNG" alt="Cita 3" class="gallery-image">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <footer>
+        <p>© 2025 Plataforma Interactiva. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/interactividad.js"></script>
+</body>
+</html>

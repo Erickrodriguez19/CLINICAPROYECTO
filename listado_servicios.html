@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Servicios</title>
+    <link rel="stylesheet" href="css/especialidades.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('imagenes/fondo.png'); /* Cambia la URL a la ubicación de tu imagen */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #4CAF50; /* Color del encabezado */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Sombra para mejor legibilidad */
+        }
+
+
+        /* Estilo para la tabla */
+        table {
+            width: 80%; /* Asegúrate de que la tabla no ocupe todo el ancho */
+            margin: 30px auto; /* Centrar la tabla */
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
+            border-radius: 8px; /* Bordes redondeados */
+            overflow: hidden; /* Para que los bordes redondeados funcionen */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para la tabla */
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 12px; /* Un poco más de espacio en la tabla */
+        }
+
+        th {
+            background-color: #4CAF50; /* Color de fondo para el encabezado */
+            color: white; /* Color del texto del encabezado */
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Estilo para los botones */
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center; /* Centrar los botones */
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px; /* Espaciado entre botones */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button.delete {
+            background-color: #f44336;
+        }
+
+        button.delete:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listado de Servicios</h1>
+    <h1><a href="registro_servicios.html" id="btn-registro">Registrar Nuevo Servicio</a></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-servicios"></tbody>
+
+        
+    </table>
+    <div class="actions">
+        <button id="btn-salir" onclick="redireccionarMenu()">Salir</button>
+    </div>
+
+    <script>
+        fetch('obtener_servicios.php')
+            .then(response => response.json())
+            .then(data => {
+                const tablaServicios = document.getElementById('tabla-servicios');
+                data.forEach(servicio => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${servicio.idservicio}</td>
+                        <td>${servicio.descripcion}</td>
+                        <td>
+                            <button onclick="eliminarServicio('${servicio.idservicio}')">Eliminar</button>
+                        </td>
+                    `;
+                    tablaServicios.appendChild(row);
+                });
+            });
+
+        function eliminarServicio(codigo) {
+            if (confirm("¿Estás seguro de que deseas eliminar este servicio?")) {
+                fetch('eliminar_servicio.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ idservicio: codigo })
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    location.reload();
+                });
+            }
+        }
+        // Función para redirigir al menú
+        document.getElementById('btn-salir').addEventListener('click', function() {
+            window.location.href = 'Menu.html'; // Redirige al menú
+        });
+    </script>
+</body>
+</html>

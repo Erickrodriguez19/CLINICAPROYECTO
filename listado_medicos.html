@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Médicos</title>
+    <link rel="stylesheet" href="css/medicos.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('imagenes/fondo.png');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            margin: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #320bdf;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        #search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        #search-dni {
+            padding: 8px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        #btn-buscar {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #btn-buscar:hover {
+            background-color: #218838;
+        }
+
+        section {
+            margin: 0 auto;
+            width: 90%;
+            background-color: rgba(13, 208, 226, 0.9);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos para la tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #051301;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #21d20d;
+            color: white;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7f6fc;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(9, 240, 244, 0.951);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            color: #555;
+        }
+
+        #btn-registro {
+            display: inline-block;
+            background-color: #a1da10;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        #btn-registro:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Listado de Médicos Registrados</h1>
+        <a href="registro_medicos.html" id="btn-registro">Registrar Nuevo Médico</a>
+    </header>
+
+    <!-- Barra de búsqueda por DNI -->
+    <div id="search-bar">
+        <input type="text" id="search-dni" placeholder="Buscar por DNI">
+        <button id="btn-buscar" onclick="buscarPorDNI()">Buscar</button>
+    </div>
+
+    <section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Apellidos</th>
+                    <th>Nombres</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>DNI</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Especialidad</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-medicos">
+                <!-- Aquí se agregarán los registros de médicos -->
+            </tbody>
+        </table>
+
+        <div class="actions">
+            <button id="btn-salir" onclick="redireccionarMenu()">Salir</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Plataforma Interactiva. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Función para cargar los médicos desde la base de datos
+        function cargarMedicos() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "obtener_medicos.php", true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById("tabla-medicos").innerHTML = this.responseText;
+                    agregarBotonesEliminar();
+                } else {
+                    console.error('Error al cargar los médicos: ' + this.status);
+                }
+            };
+            xhr.send();
+        }
+
+        // Llamar a la función cuando se cargue la página
+        window.onload = cargarMedicos;
+
+        // Función para buscar un médico por DNI
+        function buscarPorDNI() {
+            const dni = document.getElementById("search-dni").value;
+            if (dni) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", `buscar_medico.php?dni=${dni}`, true);
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        document.getElementById("tabla-medicos").innerHTML = this.responseText;
+                    } else {
+                        console.error('Error en la búsqueda: ' + this.status);
+                    }
+                };
+                xhr.send();
+            } else {
+                alert("Por favor, ingrese un DNI para buscar.");
+            }
+        }
+
+        // Función para eliminar médicos
+        function eliminarMedico(codigo) {
+            if (confirm("¿Está seguro de que desea eliminar este médico?")) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "eliminar_medico.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onload = function() {
+                    alert(this.responseText);
+                    if (this.responseText.includes("eliminado correctamente")) {
+                        window.location.reload();
+                    }
+                };
+                xhr.send("codigo=" + codigo);
+            }
+        }
+
+        // Función para redirigir al menú
+        function redireccionarMenu() {
+            window.location.href = 'Menu.html';
+        }
+    </script>
+
+</body>
+</html>

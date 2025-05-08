@@ -1,0 +1,94 @@
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Mantiene el modal en la misma posición */
+    z-index: 1000; /* Encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Agrega un scrollbar si es necesario */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+}
+
+.modal-content {
+    background-color: #c0e8e8; /* Fondo blanco para el contenido */
+    margin: 10% auto; /* Margen superior e inferior */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #0d0d0e; /* Borde de color azul */
+    width: 90%; /* Ancho del modal */
+    max-width: 600px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* Sombra para un efecto de elevación */
+    animation: fadeIn 0.3s; /* Animación al abrir el modal */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between; /* Espacio entre el título y el botón cerrar */
+    align-items: center; /* Centra verticalmente el contenido */
+}
+
+.modal-title {
+    margin: 0; /* Elimina márgenes para un mejor espaciado */
+    color: #dfe3e8; /* Color del título */
+    font-size: 24px; /* Tamaño del texto del título */
+    text-align: center; /* Centra el título */
+    flex-grow: 1; /* Permite que el título ocupe el espacio disponible */
+}
+
+.cerrar {
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-size: 28px; /* Tamaño del texto del botón */
+    color: #007BFF; /* Color del botón */
+    transition: color 0.3s; /* Transición suave para el color */
+}
+
+.cerrar:hover {
+    color: #FF5733; /* Color al pasar el mouse (rojo) */
+}
+
+.modal-body {
+    color: #333; /* Color del texto del contenido */
+    line-height: 1.6; /* Mejora la legibilidad */
+}
+
+.modal-body h3 {
+    margin-top: 20px; /* Espacio antes del encabezado */
+    color: #007BFF; /* Color del subtítulo */
+}
+
+.modal-body p, .modal-body ul {
+    margin-bottom: 15px; /* Espacio inferior para párrafos y listas */
+}
+
+/* Estilo para las listas */
+.modal-body ul {
+    padding-left: 20px; /* Sangría para las listas */
+}
+
+.modal-body ul li {
+    margin-bottom: 8px; /* Espacio entre elementos de la lista */
+}
+
+/* Estilo para la galería de imágenes */
+.image-gallery {
+    display: flex; /* Usar flexbox para alinear las imágenes */
+    justify-content: space-around; /* Espacio entre las imágenes */
+    flex-wrap: wrap; /* Permite que las imágenes se envuelvan en caso de que no quepan */
+    margin-top: 20px; /* Margen superior para la galería */
+}
+
+.gallery-image {
+    width: 30%; /* Ancho de las imágenes */
+    border-radius: 8px; /* Bordes redondeados para las imágenes */
+    transition: transform 0.3s; /* Transición para el efecto de zoom */
+}
+
+.gallery-image:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
