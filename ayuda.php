@@ -176,7 +176,7 @@
 </div>
 
 <footer>
-    <p>© 2024 Clínica Salud. Todos los derechos reservados.</p>
+    <p>© 2025 Clínica Salud. Todos los derechos reservados.</p>
 </footer>
 
 </body>
