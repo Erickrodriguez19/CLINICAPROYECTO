@@ -1,4 +1,4 @@
-## ACTOR - JHON ERICK RODRIGUEZ MONJA
+## AUTOR - JHON ERICK RODRIGUEZ MONJA
 
 # Sistema de Gestión de Productos - Clínica NOVA SALUD
 
